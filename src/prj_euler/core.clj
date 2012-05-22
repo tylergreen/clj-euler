@@ -6,22 +6,16 @@
 (defn drop-fives [seq]
   (remove #(= 0 (mod % 5)) seq))
 
-
-;; Problem 1
-;; this causes infinite loop in repl
-;; (defn 3and5-multiples []
-;;   (interleave (-> 3 multiples drop-fives )
-;;               (multiples 5)))
-
 (defn multiples-3and5-under [n]
-  (take-while #(< % n)
-              (interleave
-               (drop-fives (multiples 3))
-               (multiples 5))))
+  (mapcat (fn [seq] (take-while #(> n %) seq))
+          [(drop-fives (multiples 3))
+           (multiples 5)]))
 
 (defn problem1 []
   (reduce + (multiples-3and5-under 1000)))
-        
+
+
+;; Tests
 (= [2 4 6 8 10] (take 5 (multiples 2)))
 (= '(3 6 9 12 15) (take 5 (multiples 3)))
 (= '(5 10 15 20 25) (take 5 (multiples 5)))
