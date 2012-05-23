@@ -39,7 +39,8 @@
 (defn factor? [n fac]
   (= 0 (mod n fac)))
 
-; Due to Rich Hickey
+                                        ; Due to Rich Hickey
+(with-test
 (defn sieve [n]
   (let [n (long n)]
     "Returns a list of all primes from 2 to n"
@@ -63,6 +64,19 @@
                  (if (zero? (aget a i))
                    (conj result i)
                    result)))))))
+(is (=
+     (sieve 100)
+     '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97))))
+
 
 (defn odds []
-  (iterate #(+ 2 %) 3 ))
+  (iterate #(+ 2 %) 1 ))
+
+(with-test
+    (defn factor? [n fac]
+      (= 0 (mod n fac)))
+  (is (factor? 4 2))
+  (is (factor? 9 3))
+  (is (factor? 11 3))
+  (is (factor? 2 4)))
+

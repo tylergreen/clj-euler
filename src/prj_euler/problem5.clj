@@ -1,12 +1,11 @@
-(= true (factor? 20 2))
-(= false (factor? 2 20))
+(ns prj-euler.problem5
+  [:use clojure.test]
+  [:require [prj-euler.core :as util]]
+  )
 
-(defn factor? [n fac]
-  (= 0 (mod n fac)))
-
-(defn five []
+(defn problem5 []
   (some
-   #(if (every? (partial factor? %) (range 2 20))
+   #(if (every? (partial util/factor? %) (range 2 20))
       %)
    (iterate #(+ 20 %) 20 )))
 
