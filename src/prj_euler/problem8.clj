@@ -3,8 +3,7 @@
   [:require [prj-euler.core :as util]]
   )
 
-(with-test
-    (defn all-subseqs [n seq]
+(defn all-subseqs [n seq]
       (loop [xs seq
              acc []
              ]
@@ -12,11 +11,6 @@
           (reverse (cons xs acc))
           (recur (rest xs) (cons (take n xs) acc))
                 )))
-  (is (= [[8]] (all-subseqs 1 [8])))
-  (is (= [[1 2]] (all-subseqs 2 [1 2])))
-  (is (= [[1 2] [2 3]] (all-subseqs 2 [1 2 3])))
-  (is (= [[1 2 3 4 5] [2 3 4 5 6]] (all-subseqs 5 [1 2 3 4 5 6])))
-  (is (= [[1 2]] (all-subseqs 5 [1 2]))))
 
 (defn problem8 [n]
   (apply max (map #(apply * %) (all-subseqs 5 (util/digits n)))))

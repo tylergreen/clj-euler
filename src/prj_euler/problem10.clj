@@ -1,7 +1,7 @@
-(ns prj-euler.core
-  [:use [prj-euler.core clojure.contrib.math] ]
+(ns prj-euler.problem10
+  [:use [prj-euler.core] ]
   )
 
-(def problem10 
-  (reduce + (sieve (* 2 (expt 10 6)))))
+(defn problem10 []
+  (reduce + (sieve (* 2 (Math/pow 10 6)))))
 

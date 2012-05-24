@@ -5,5 +5,5 @@
                  ]
   :dev-dependencies [[speclj "2.1.1"]
                      [lein-swank "1.4.4"]]
-  :test-path "test/"
+  :test-path "spec/"
   )

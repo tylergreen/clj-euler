@@ -3,11 +3,11 @@
   [:require [prj-euler.core :as util]]
   )
 
-(defn problem5 []
+(defn problem5 [n]
   (some
-   #(if (every? (partial util/factor? %) (range 2 20))
+   #(if (every? (partial util/factor? %) (range 2 n))
       %)
-   (iterate #(+ 20 %) 20 )))
+   (iterate #(+ n %) n )))
 
 
   

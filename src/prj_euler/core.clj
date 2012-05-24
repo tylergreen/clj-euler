@@ -2,33 +2,19 @@
   [:use clojure.test]
   )
 
-(with-test
-    (defn ones-digit [n]
-      (mod n 10))
-  (is (= 1 (ones-digit 1)))
-  (is (= 2 (ones-digit 12)))
-  (is (= 3 (ones-digit 543))))
+(defn ones-digit [n]
+  (mod n 10))
 
-(with-test
-    (defn break-off-ones [n]
-      (/ (- n (ones-digit n)) 10))
-  (is (every? #(= 0 %) (map break-off-ones (range 9))))
-  (is (= 9 (break-off-ones 93))))
-  (is (= 98 (break-off-ones 987)))
-  (is (= 123 (break-off-ones 1234)))
+(defn break-off-ones-digit [n]
+  (/ (- n (ones-digit n)) 10))
 
-(with-test
-    (defn digits [integer]
-      (loop [n integer
-             digits []]
-        (if (= 0 n)
-          digits
-          (recur (break-off-ones n)
-                 (cons (int (ones-digit n)) digits)))))
-      (is (= [1] (digits 1)))
-      (is (= [3 7] (digits 37)))
-      (is (= [1 2 3] (digits 123)))
-      )
+(defn digits [integer]
+  (loop [n integer
+         digits []]
+    (if (= 0 n)
+      digits
+      (recur (break-off-ones-digit n)
+             (cons (int (ones-digit n)) digits)))))
 
 (defn naive-sieve  [[p & rst]]
   (lazy-seq (cons p (naive-sieve (remove #(= 0 (mod % p)) rst)))))
